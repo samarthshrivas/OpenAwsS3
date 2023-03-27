@@ -17,13 +17,13 @@ def list_files(endpoint_url, bucket):
 
 def main():
     # Create Streamlit app
-    st.title('List Public S3 Files')
+    st.title('Public S3 Files Download')
     # Get user inputs
     st.write("Example: ```https://s3.us-central-1.example.com/seed/```")
     endpoint_url = st.text_input('Endpoint URL', placeholder="https://s3.us-central-1.example.com")
     bucket = st.text_input('Bucket Name', placeholder="seed")
     # Call list_files function to list files and return the output
-    if st.button('List Files'):
+    if st.button('Start'):
         list_files(endpoint_url, bucket)
         # Display the output file contents
 
