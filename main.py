@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+
 def list_files(endpoint_url, bucket):
     # Call AWS CLI command to list files recursively and write the output to a file
     os.system(f"aws --endpoint-url={endpoint_url} s3 ls s3://{bucket}/ --recursive --no-sign-request > output.txt")
