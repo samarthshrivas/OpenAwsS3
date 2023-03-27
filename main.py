@@ -8,15 +8,12 @@ def list_files(endpoint_url, bucket):
     with tempfile.NamedTemporaryFile() as f:
 
     
-        r = sp.call(f"aws --output json s3api list-objects --bucket {bucket} --no-sign-request --endpoint-url {endpoint_url} > {f.name}", shell = True)
+        sp.call(f"aws --output json s3api list-objects --bucket {bucket} --no-sign-request --endpoint-url {endpoint_url} > {f.name}", shell = True)
     # Read the contents of the output file and return it as a string
-        print(f.name)
-        st.write('Output File Length', f.name)
+        # print(f.name)
+        st.write('Output File', f.name)
         st.download_button('Download File', data=f, file_name="output.json", mime='text/plain')
 
-# def download_file(file_contents):
-#     # Download the output file as a text file
-    
 
 def main():
     # Create Streamlit app
