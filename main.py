@@ -11,7 +11,8 @@ def list_files(endpoint_url, bucket):
     # Read the contents of the output file and return it as a string
         # print(f.name)
         st.write('Output File', f.name)
-        st.download_button('Download File', data=f, file_name="output.json", mime='text/plain')
+        with open(f.name, 'r') as g:
+            st.download_button('Download File', data=g, file_name="output.json", mime='text/plain')
 
 
 def main():
