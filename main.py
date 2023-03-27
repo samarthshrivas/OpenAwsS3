@@ -1,8 +1,7 @@
 import streamlit as st
 import subprocess as sp 
-import uuid  
 import tempfile
-import json
+
 def list_files(endpoint_url, bucket):
     # Call AWS CLI command to list files recursively and write the output to a file
     with tempfile.NamedTemporaryFile() as f:
