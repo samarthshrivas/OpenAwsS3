@@ -1,19 +1,22 @@
 import streamlit as st
-import os
- 
+import subprocess as sp 
+import uuid  
+import tempfile
+import json
 def list_files(endpoint_url, bucket):
     # Call AWS CLI command to list files recursively and write the output to a file
-    os.system(f"aws --endpoint-url={endpoint_url} s3 ls s3://{bucket}/ --recursive --no-sign-request > output.txt")
-    # Read the contents of the output file and return it as a string
-    with open('output.txt', 'r') as file:
-        file_contents = file.read()
-    return file_contents
+    with tempfile.NamedTemporaryFile() as f:
 
-def download_file(file_contents):
-    # Download the output file as a text file
-    with open('output.txt', 'w') as file:
-        file.write(file_contents)
-    st.download_button('Download File', 'output.txt', 'text/plain')
+    
+        r = sp.call(f"aws --output json s3api list-objects --bucket {bucket} --no-sign-request --endpoint-url {endpoint_url} > {f.name}", shell = True)
+    # Read the contents of the output file and return it as a string
+        print(f.name)
+        st.write('Output File Length', f.name)
+        st.download_button('Download File', data=f, file_name="output.json", mime='text/plain')
+
+# def download_file(file_contents):
+#     # Download the output file as a text file
+    
 
 def main():
     # Create Streamlit app
@@ -24,11 +27,11 @@ def main():
     bucket = st.text_input('Bucket Name', placeholder="seed")
     # Call list_files function to list files and return the output
     if st.button('List Files'):
-        file_contents = list_files(endpoint_url, bucket)
+        list_files(endpoint_url, bucket)
         # Display the output file contents
-        st.text_area('Output', file_contents)
-        # Allow user to download the output file
-        download_file(file_contents)
+
+        
+
 
 if __name__ == '__main__':
     
