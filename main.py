@@ -2,6 +2,7 @@ import streamlit as st
 import subprocess as sp 
 import tempfile
 import json
+from pathlib import Path
 def list_files(endpoint_url, bucket):
     # Call AWS CLI command to list files recursively and write the output to a file
     with tempfile.NamedTemporaryFile() as f:
@@ -14,7 +15,7 @@ def list_files(endpoint_url, bucket):
         with open(f.name, 'r') as g:
             js = json.load(g)
             st.write('Total Files', len(js["Contents"]))
-            st.download_button('Download File', data=js, file_name="output.json", mime='text/json')
+            st.download_button('Download File', data=Path(f.name).read_text(), file_name="output.json", mime='application/json')
 
 
 def main():
