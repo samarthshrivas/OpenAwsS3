@@ -12,8 +12,9 @@ def list_files(endpoint_url, bucket):
         # print(f.name)
         
         with open(f.name, 'r') as g:
-            st.write('Total Files', len(json.load(g)["Contents"]))
-            st.download_button('Download File', data=json.load(g), file_name="output.json", mime='text/plain')
+            js = json.load(g)
+            st.write('Total Files', len(js["Contents"]))
+            st.download_button('Download File', data=js, file_name="output.json", mime='text/json')
 
 
 def main():
