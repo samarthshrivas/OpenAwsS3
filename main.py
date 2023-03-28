@@ -24,10 +24,12 @@ def main():
     endpoint_url = st.text_input('Endpoint URL', placeholder="https://s3.us-central-1.example.com")
     bucket = st.text_input('Bucket Name', placeholder="seed")
     # Call list_files function to list files and return the output
-    if st.button('Start'):
-        print("Working on -------------------", endpoint_url, bucket)
-        list_files(endpoint_url, bucket)
-        # Display the output file contents
+
+    if endpoint_url:
+        if st.button('Start'):
+            print("Working on -------------------", endpoint_url, bucket)
+            list_files(endpoint_url, bucket)
+            
 
         
 
@@ -35,4 +37,4 @@ def main():
 if __name__ == '__main__':
     
     main()
-    st.warning("This tool is for educational purposes only. The creator is not responsible for any unethical use of this tool.")
+    st.warning("Disclaimer: This tool is for educational purposes only. The creator is not responsible for any unethical use of this tool.")
