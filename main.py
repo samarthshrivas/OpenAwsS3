@@ -17,7 +17,7 @@ def list_files(endpoint_url, bucket):
             js = json.load(g)
             st.write('Total Files', len(js["Contents"]))
             st.download_button('Download Json', data=Path(f.name).read_text(), file_name="output.json", mime='application/json')
-            st.download_button("Download Links.txt", data='\n'.join([os.path.join(endpoint_url,bucket,x["Key"]) for x in js["Contents"]])(), file_name="links.txt" )
+            st.download_button("Download Links.txt", data='\n'.join([os.path.join(endpoint_url,bucket,x["Key"]) for x in js["Contents"]]), file_name="links.txt" )
 
 
 def main():
